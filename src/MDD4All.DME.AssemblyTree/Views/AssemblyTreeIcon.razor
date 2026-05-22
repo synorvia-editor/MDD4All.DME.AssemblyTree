@@ -1,0 +1,10 @@
+﻿@using MDD4All.DME.AssemblyTree.ViewModels
+@if (DataContext is RootNodeViewModel)
+{
+    <img src="_content/MDD4All.DME.AssemblyTree/icons/DotNetIcon.png" height="20" />
+}
+else
+{
+    <span style="@CssStyle">@UnicodeIcon</span>
+}
+

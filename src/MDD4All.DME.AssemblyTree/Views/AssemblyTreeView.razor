@@ -1,0 +1,30 @@
+﻿@using MDD4All.UI.BlazorComponents.Tree
+@using MDD4All.DME.AssemblyTree.ViewModels
+<div style="min-height:600px;">
+
+    <MvvmTree TNode="AssemblyNodeViewModel"
+              DataContext="@DataContext"
+              SelectedNodeChanged="OnSelectionChanged">
+
+        <TitleTemplate>
+
+
+            <span style="display:inline-flex; vertical-align:middle">
+                <AssemblyTreeIcon DataContext="context" />&nbsp;
+                @if (context is AssemblyElementNodeViewModel)
+                {
+                    <strong>@context.Title</strong>
+                }
+                else if (context is RootNodeViewModel)
+                {
+                    <span style="color: #512BD4; font-style:italic; font-weight:bold;">@context.Title</span>
+                }
+                else
+                {
+                    @context.Title
+                }
+            </span>
+        </TitleTemplate>
+        <LoadingTemplate><span class="placeholder-glow"></span></LoadingTemplate>
+    </MvvmTree>
+</div>
