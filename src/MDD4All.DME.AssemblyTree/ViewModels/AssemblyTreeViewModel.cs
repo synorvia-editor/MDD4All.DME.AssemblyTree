@@ -39,6 +39,14 @@ namespace MDD4All.DME.AssemblyTree.ViewModels
 
             foreach (Type type in types)
             {
+                if (type.Namespace == null)
+                {
+                    // Compiler-generated types (e.g. <PrivateImplementationDetails>, emitted
+                    // for array/collection literals) have no namespace and are never valid
+                    // selectable data models - skip them instead of crashing below.
+                    continue;
+                }
+
                 NamespaceNodeViewModel namespaceNode = (NamespaceNodeViewModel)CreateOrGetNamespaceNode(type);
 
                 AssemblyElementNodeViewModel assemblyElementNode = new AssemblyElementNodeViewModel(type, 
