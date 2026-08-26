@@ -1,5 +1,6 @@
 ﻿using MDD4All.AssemblyLoading.Contracts;
 using MDD4All.UI.DataModels.Tree;
+using System.CodeDom.Compiler;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -47,6 +48,14 @@ namespace MDD4All.DME.AssemblyTree.ViewModels
                     continue;
                 }
 
+                if (IsGeneratedResourceClass(type))
+                {
+                    // Every resx compiles into a class of static properties. It is public
+                    // because [Display] annotations point at it, but its constructor is
+                    // internal - picking it as a data model can only fail.
+                    continue;
+                }
+
                 NamespaceNodeViewModel namespaceNode = (NamespaceNodeViewModel)CreateOrGetNamespaceNode(type);
 
                 AssemblyElementNodeViewModel assemblyElementNode = new AssemblyElementNodeViewModel(type, 
@@ -56,6 +65,28 @@ namespace MDD4All.DME.AssemblyTree.ViewModels
 
                 namespaceNode.Children.Add(assemblyElementNode);
             }
+        }
+
+        // Narrow on purpose: the builder writes its own name into the attribute, so this asks
+        // for exactly one kind of generated type. Skipping everything marked as generated would
+        // one day throw away a source-generated model that is perfectly editable.
+        private bool IsGeneratedResourceClass(Type type)
+        {
+            bool result = false;
+
+            object[] attributes = type.GetCustomAttributes(typeof(GeneratedCodeAttribute), false);
+
+            foreach (object attribute in attributes)
+            {
+                if (attribute is GeneratedCodeAttribute generatedCode &&
+                    generatedCode.Tool == "System.Resources.Tools.StronglyTypedResourceBuilder")
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         private ITreeNode CreateOrGetNamespaceNode(Type type)
@@ -70,10 +101,13 @@ namespace MDD4All.DME.AssemblyTree.ViewModels
 
                 AssemblyNodeViewModel currentNode = (AssemblyNodeViewModel)_treeRootNodes[0];
 
-                bool nodeFound = false;
-
                 foreach (string part in namespaceParts)
                 {
+                    // Per level. Kept across levels, the first match would make every deeper
+                    // level count as found, and those namespaces would never be built - their
+                    // types ended up one folder too high.
+                    bool nodeFound = false;
+
                     // search for existing node
                     foreach (ITreeNode treeNode in currentNode.Children)
                     {
