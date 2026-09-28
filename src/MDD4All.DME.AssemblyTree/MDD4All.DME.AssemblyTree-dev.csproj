@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\MDD4All.AssemblyLoading.Contracts\src\MDD4All.AssemblyLoading.Contracts\MDD4All.AssemblyLoading.Contracts-dev.csproj" />
-    <ProjectReference Include="..\..\..\MDD4All.UI.BlazorComponents\src\MDD4All.UI.BlazorComponents\MDD4All.UI.BlazorComponents-dev.csproj" />
-    <ProjectReference Include="..\..\..\MDD4All.UI.DataModels\src\MDD4All.UI.DataModels\MDD4All.UI.DataModels-dev.csproj" />
+    <ProjectReference Include="..\..\..\Synorvia.UI.BlazorComponents\src\Synorvia.UI.BlazorComponents\Synorvia.UI.BlazorComponents-dev.csproj" />
+    <ProjectReference Include="..\..\..\Synorvia.UI.DataModels\src\Synorvia.UI.DataModels\Synorvia.UI.DataModels-dev.csproj" />
   </ItemGroup>
 
 

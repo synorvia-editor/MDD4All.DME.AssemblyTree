@@ -1,5 +1,5 @@
 ﻿using MDD4All.AssemblyLoading.Contracts;
-using MDD4All.UI.DataModels.Tree;
+using Synorvia.UI.DataModels.Tree;
 using System.CodeDom.Compiler;
 using System.Collections.ObjectModel;
 using System.Reflection;

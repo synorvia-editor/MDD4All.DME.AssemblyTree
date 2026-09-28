@@ -1,5 +1,5 @@
 using MDD4All.DME.AssemblyTree.ViewModels;
-using MDD4All.UI.DataModels.Tree;
+using Synorvia.UI.DataModels.Tree;
 using Microsoft.AspNetCore.Components;
 
 namespace MDD4All.DME.AssemblyTree.Views

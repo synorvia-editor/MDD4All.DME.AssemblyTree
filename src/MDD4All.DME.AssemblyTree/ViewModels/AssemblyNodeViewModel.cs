@@ -1,4 +1,4 @@
-﻿using MDD4All.UI.DataModels.Tree;
+﻿using Synorvia.UI.DataModels.Tree;
 using System.Collections.ObjectModel;
 
 namespace MDD4All.DME.AssemblyTree.ViewModels
