@@ -7,10 +7,45 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
+  <!-- What the listing on a package feed shows. The version is only a fallback: the
+       build hands in the real one, read from src/version.txt plus the run number. -->
+  <PropertyGroup>
+    <Version>2.0.0.0</Version>
+    <Authors>Dr. Oliver Alt, mDuckLab</Authors>
+    <Company>MDD4All.de</Company>
+    <Copyright>(c) 2026 oalt, mDuckLab</Copyright>
+    <Description>Shows the types of a .NET assembly as a tree - assembly, namespaces, types - to pick one from, the way a file dialog picks a file.</Description>
+    <PackageTags>Blazor Assembly Types TreeView Reflection</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>Nuget.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <!-- Where the package came from, and what a debugger needs to step into this code from
+       a project that only has the package. The repository address is not written out: it is
+       read from the git remote while packing, so moving the repository changes nothing here. -->
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MDD4All.AssemblyLoading.Contracts" Version="2.0.0.1" />
+    <PackageReference Include="Synorvia.UI.BlazorComponents" Version="2.0.0.1" />
+    <PackageReference Include="Synorvia.UI.DataModels" Version="2.0.0.3" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Nuget.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
